@@ -1,7 +1,14 @@
+using BLL.LogicServices;
+using DAL.DataServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// adding lifetime for Services
+builder.Services.AddScoped<IStudentsLogic, StudentsLogic>();
+builder.Services.AddScoped<IStudentsDataDAL, StudentsDataDAL>();
 
 var app = builder.Build();
 
