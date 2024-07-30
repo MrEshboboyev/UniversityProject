@@ -1,6 +1,9 @@
 ﻿using BOL.DatabaseEntities;
+using DAL.DataContext;
+using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +12,31 @@ namespace DAL.DataServices
 {
     public class StudentsDataDAL : IStudentsDataDAL
     {
+        private readonly IDapperOrmHelper _dapperOrmHelper;
+        public StudentsDataDAL(IDapperOrmHelper dapperOrmHelper)
+        {
+            _dapperOrmHelper = dapperOrmHelper;
+        }
+
         public List<Students> GetStudentsListDAL()
         {
-            return new List<Students>();    
+            List<Students> students = new List<Students>();
+
+            try
+            {
+                using (IDbConnection dbConnection = _dapperOrmHelper.GetDapperContextHelper())
+                {
+                    string sqlQuery = "SELECT * FROM \"Students\"";
+                    students = dbConnection.Query<Students>(sqlQuery, commandType: 
+                        CommandType.Text).ToList();   
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;    
+            }
+
+            return students;
         }
     }
 }

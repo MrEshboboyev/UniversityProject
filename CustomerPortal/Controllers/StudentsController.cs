@@ -1,4 +1,5 @@
 ﻿using BLL.LogicServices;
+using BOL.CommonEntities;
 using BOL.DatabaseEntities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,12 +16,13 @@ namespace CustomerPortal.Controllers
 
         public IActionResult StudentsList()
         {
+            // main model
+            StudentModule model = new StudentModule();
+
             // get students list
-            List<Students> result = new List<Students>();
+            model.studentsList = _studentsLogic.GetStudentsListLogic().ToList();
 
-            result = _studentsLogic.GetStudentsListLogic().ToList();
-
-            return View(result);
+            return View(model);
         }
     }
 }

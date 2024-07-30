@@ -1,4 +1,5 @@
 using BLL.LogicServices;
+using DAL.DataContext;
 using DAL.DataServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddControllersWithViews();
 // adding lifetime for Services
 builder.Services.AddScoped<IStudentsLogic, StudentsLogic>();
 builder.Services.AddScoped<IStudentsDataDAL, StudentsDataDAL>();
+builder.Services.AddScoped<IDapperOrmHelper, DapperOrmHelper>();
 
 var app = builder.Build();
 
