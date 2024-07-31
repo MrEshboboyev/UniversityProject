@@ -38,5 +38,36 @@ namespace DAL.DataServices
 
             return students;
         }
+
+        #region Create Students
+
+        public string CreateStudentsDAL(Students student)
+        {
+            string result = String.Empty;
+
+            try
+            {
+                using (IDbConnection dbConnection = _dapperOrmHelper.GetDapperContextHelper())
+                {
+                    dbConnection.Execute(@"INSERT INTO ""Students"" (FirstName, LastName, Email) 
+                        VALUES (@FirstName, @LastName, @Email)", 
+                        new
+                        {
+                            FirstName = student.FirstName, LastName = student.LastName, Email = student.Email 
+                        },
+                        commandType: CommandType.Text);
+
+                    result = "Saved successfully";
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }

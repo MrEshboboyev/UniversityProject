@@ -23,5 +23,28 @@ namespace BLL.LogicServices
 
             return result;
         }
+
+        public string CreateStudentLogic(Students student)
+        {
+            string result = String.Empty;
+
+            if (student.Email.StartsWith("al"))
+            {
+                result = "Email should not be start with 'al'";
+                return result;
+            }
+
+            result = _studentsDataDAL.CreateStudentsDAL(student);
+            if(result == "Saved successfully")
+            {
+                return result;
+            }
+            else
+            {
+                result = "An error occurred. PLease try again!";
+                return result;
+            }
+
+        }
     }
 }

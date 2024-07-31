@@ -24,5 +24,32 @@ namespace CustomerPortal.Controllers
 
             return View(model);
         }
+
+        #region Create Student
+
+        [HttpGet]
+        public IActionResult CreateStudent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateStudentPost(Students model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _studentsLogic.CreateStudentLogic(model);
+
+                if (result != "Saved successfully")
+                {
+                    TempData["ErrorTemp"] = result;
+                }
+                return RedirectToAction("StudentsList", "Students");
+            }
+
+            return View(model);
+        }
+
+        #endregion
     }
 }
