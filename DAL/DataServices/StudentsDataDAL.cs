@@ -69,5 +69,69 @@ namespace DAL.DataServices
         }
 
         #endregion
+
+        #region Update Student
+
+        public string UpdateStudentDAL(Students student)
+        {
+            string result = string.Empty;
+
+            try
+            {
+                using (IDbConnection dbConnection = _dapperOrmHelper.GetDapperContextHelper())
+                {
+                    dbConnection.Execute(@"UPDATE ""Students"" SET FirstName = @FirstName, 
+                            LastName = @LastName, Email = @Email WHERE StudentId = @StudentId",
+                            new
+                            {
+                                FirstName = student.FirstName,
+                                LastName = student.LastName,
+                                Email = student.Email,
+                                StudentId = student.StudentId,
+                            }, commandType: CommandType.Text);
+
+                    result = "Updated Successfully!";
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion
+
+        #region Get Student By Id
+
+        public Students GetStudentByIdDAL(int studentId)
+        {
+            var result = new Students();
+
+            try
+            {
+                using (IDbConnection dbConnection = _dapperOrmHelper.GetDapperContextHelper())
+                {
+                    string sqlQuery = "SELECT * FROM \"Students\" WHERE StudentId = @StudentId";
+
+                    result = dbConnection.QueryFirstOrDefault<Students>(sqlQuery, 
+                        new
+                        {
+                            StudentId = studentId
+                        }, commandType: CommandType.Text);
+
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }

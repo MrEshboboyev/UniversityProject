@@ -11,5 +11,7 @@ namespace DAL.DataServices
     {
         List<Students> GetStudentsListDAL();
         string CreateStudentsDAL(Students students);
+        string UpdateStudentDAL(Students student);
+        Students GetStudentByIdDAL(int studentId);
     }
 }

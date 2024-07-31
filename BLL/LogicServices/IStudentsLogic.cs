@@ -11,5 +11,7 @@ namespace BLL.LogicServices
     {
         List<Students> GetStudentsListLogic();
         string CreateStudentLogic(Students students);
+        Students GetStudentByIdLogic(int studentId);
+        string UpdateStudentLogic(Students students);
     }
 }

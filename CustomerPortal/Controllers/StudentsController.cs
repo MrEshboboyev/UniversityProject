@@ -51,5 +51,36 @@ namespace CustomerPortal.Controllers
         }
 
         #endregion
+
+        #region Update Student
+
+        [HttpGet]
+        public IActionResult UpdateStudent(int studentId)
+        {
+            var student = _studentsLogic.GetStudentByIdLogic(studentId);
+            return View(student);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateStudentPost(Students student)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _studentsLogic.UpdateStudentLogic(student);
+
+                if(result == "Updated Successfully!")
+                {
+                    return RedirectToAction("StudentsList");
+                }
+                else
+                {
+                    TempData["ErrorTemp"] = "An error occurred updating Student.PLease, try again";
+                    return RedirectToAction("StudentsList");
+                }
+            }
+
+            return View(student);
+        }
+        #endregion
     }
 }

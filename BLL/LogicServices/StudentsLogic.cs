@@ -46,5 +46,50 @@ namespace BLL.LogicServices
             }
 
         }
+
+        #region Get Student By Id
+
+        public Students GetStudentByIdLogic(int studentId)
+        {
+            Students student = new Students();
+
+            student = _studentsDataDAL.GetStudentByIdDAL(studentId);
+            if(student != null)
+            {
+                return student;
+            }
+
+            return new Students();
+        }
+
+        #endregion
+
+
+        #region Update Student
+
+        public string UpdateStudentLogic(Students student)
+        {
+            string result = String.Empty;
+
+            if (student.Email.StartsWith("al"))
+            {
+                result = "Email should not be start with 'al'";
+                return result;
+            }
+
+            result = _studentsDataDAL.UpdateStudentDAL(student);
+            if (result == "Updated Successfully!")
+            {
+                return result;
+            }
+            else
+            {
+                result = "An error occurred. PLease try again!";
+                return result;
+            }
+
+        }
+
+        #endregion
     }
 }
