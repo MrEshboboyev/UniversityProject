@@ -91,5 +91,22 @@ namespace BLL.LogicServices
         }
 
         #endregion
+
+        #region Delete Student
+
+        public string DeleteStudentLogic(int studentId)
+        {
+            string result = String.Empty;
+
+            result = _studentsDataDAL.DeleteStudentDAL(studentId);
+            if(result != "Deleted Successfully!")
+            {
+                return "An error occurred delete student. Please, try again!";
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }

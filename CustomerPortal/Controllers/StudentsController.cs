@@ -82,5 +82,29 @@ namespace CustomerPortal.Controllers
             return View(student);
         }
         #endregion
+
+        #region Delete Student
+
+        [HttpGet]
+        public IActionResult DeleteStudent(int studentId)
+        {
+            var student = _studentsLogic.GetStudentByIdLogic(studentId);
+            return View(student);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteStudentPost(int studentId)
+        {
+            var result = _studentsLogic.DeleteStudentLogic(studentId);
+
+            if(result != "Deleted Successfully!")
+            {
+                TempData["ErrorTemp"] = result;
+            }
+            
+            return RedirectToAction("StudentsList");
+        }
+
+        #endregion
     }
 }

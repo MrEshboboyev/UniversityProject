@@ -13,5 +13,6 @@ namespace DAL.DataServices
         string CreateStudentsDAL(Students students);
         string UpdateStudentDAL(Students student);
         Students GetStudentByIdDAL(int studentId);
+        string DeleteStudentDAL(int studentId);
     }
 }

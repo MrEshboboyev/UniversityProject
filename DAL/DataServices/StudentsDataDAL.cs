@@ -133,5 +133,34 @@ namespace DAL.DataServices
         }
 
         #endregion
+
+        #region Delete Student
+
+        public string DeleteStudentDAL(int studentId)
+        {
+            string result = String.Empty;
+
+            try
+            {
+                using (IDbConnection dbConnection = _dapperOrmHelper.GetDapperContextHelper())
+                {
+                    dbConnection.Execute(@"DELETE FROM ""Students"" WHERE StudentId=@StudentId",
+                        new
+                        {
+                            StudentId = studentId
+                        }, commandType: CommandType.Text);
+
+                    result = "Deleted Successfully!";
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }

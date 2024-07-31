@@ -1,0 +1,45 @@
+﻿@model Students;
+
+<div>
+    <h3>Delete Student</h3>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        @{
+            if (TempData["ErrorTemp"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["ErrorTemp"]
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <form asp-controller="Students" asp-action="DeleteStudentPost">
+            <input type="hidden" asp-for="StudentId" />
+            @*For FirstName *@
+            <div class="form-group">
+                <label for="FirstName">First Name</label>
+                <input disabled type="text" class="form-control" asp-for="FirstName" id="FirstName" name="FirstName" placeholder="Enter First Name" />
+            </div>
+
+            @*For LastName *@
+            <div class="form-group">
+                <label for="LastName">Last Name</label>
+                <input disabled type="text" class="form-control" asp-for="LastName" id="LastName" name="LastName" placeholder="Enter Last Name" />
+            </div>
+
+            @*For Email *@
+            <div class="form-group">
+                <label for="Email ">Email</label>
+                <input disabled type="text" class="form-control" asp-for="Email" id="Email" name="Email" placeholder="Enter Email" />
+            </div>
+
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</div>

@@ -13,5 +13,6 @@ namespace BLL.LogicServices
         string CreateStudentLogic(Students students);
         Students GetStudentByIdLogic(int studentId);
         string UpdateStudentLogic(Students students);
+        string DeleteStudentLogic(int studentId);
     }
 }
